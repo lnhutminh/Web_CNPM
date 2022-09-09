@@ -1,0 +1,145 @@
+<div class="container-fluid mt-4 mx-5">
+    <div class="row">
+        <div class="col-9 mb-3">
+            <h2>{{lesson.title}}</h2>
+            <p>{{lesson.des}}</p>
+            <video controls src="{{lesson.videoUrl}}" width="100%" controlsList="nodownload" autoplay>       
+            </video>
+        </div>
+        <div class="col">
+            <h3>Documents</h3>
+            {{#each lesson.documents}}
+            <div class="d-flex justify-content-between align-center">
+                <a href="{{this.docUrl}}" class="pt-1" target="_blank">{{this.name}}</a>
+                <a type="button" class="btn text-danger" href='{{../lesson._id}}/delete-document/{{this.id}}'><i class="fas fa-trash-alt"></i></a>
+            </div>
+            {{/each}}
+            <div class="mt-5">
+                <button type="button" class="btn btn-outline-success w-100 my-3" data-toggle="modal" data-target="#addDoc">
+                    <i class="fa fa-fw fa-plus-circle"></i> Add Document
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="addDoc" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Add Document</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="/myteaching/lesson/add-document" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <p>Choose a document</p>
+                                    <input type="file" class="form-control py-1" name="file" style="border: solid 1px black">
+                                </div>
+                                <input type="hidden" name="lessonId" value="{{lesson._id}}">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline-secondary w-100 mb-3 {{#if autoshow}}autoshow{{/if}}" data-toggle="modal" data-target="#changeVideo">
+                    <i class="far fa-edit"></i> Change video
+                </button>
+                <div class="modal fade" id="changeVideo" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Change lesson video</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="/myteaching/lesson/change-video" method="post" enctype="multipart/form-data">
+                                <div class="modal-body mb-0">
+                                    <p>Choose another video</p>
+                                    <input type="file" accept="video/*" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "video"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}} py-1" name="file" style="border: solid 1px black">
+                                {{#each errorMessage}}
+                                {{#ifEquals this.param "video"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                                {{/each}}
+                                </div>
+                                <input type="hidden" name="lessonId" value="{{lesson._id}}">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary cancel-btn" data-dismiss="modal">Cancel</button>
+                                    <button id="addlesson-btn" onclick="changeToLoading()" type="submit" class="btn btn-success"
+                                        style="min-width: 4rem">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline-secondary w-100 mb-3 {{#if autoshowedit}}autoshow{{/if}}" data-toggle="modal" data-target="#editLesson">
+                    <i class="far fa-edit"></i> Edit lesson infomation
+                </button>
+                <div class="modal fade" id="editLesson" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Edit Lesson Infomation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="/myteaching/lesson/edit-lesson" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="form-group mb-0">
+                                        <label class="title">New Title</label>
+                                        <input type="text" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "title"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="title" value="{{lesson.title}}">
+                                    </div>
+                                    {{#each errorMessage}}
+                                    {{#ifEquals this.param "title"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                                    {{/each}}
+                                    <div class="form-group mb-0 mt-3">
+                                        <label class="description">New Description</label>
+                                        <textarea type="text"
+                                            class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "description"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="description" style="height: 6rem">{{lesson.des}}</textarea>
+                                    </div>
+                                    {{#each errorMessage}}
+                                    {{#ifEquals this.param "description"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                                    {{/each}}
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="lessonId" value="{{lesson._id}}">
+                                    <button type="button" class="btn btn-secondary cancel-btn" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-success"
+                                        style="min-width: 4rem">Confirm</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline-danger w-100 mb-3" data-toggle="modal" data-target="#deleteLesson">
+                    <i class="fas fa-trash-alt"></i> Delete this lesson
+                </button>
+                <div class="modal fade" id="deleteLesson" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Delete Course</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure to delete lesson <strong>"{{lesson.title}}"</strong> ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <a type="button" class="btn btn-danger" href="/mylearning/lesson/{{lesson._id}}/delete-lesson">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

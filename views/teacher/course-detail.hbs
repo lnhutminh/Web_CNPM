@@ -1,0 +1,154 @@
+<div class="container-fluid mt-4 mx-5">
+    <div class="row">
+        <div class="col-3">
+            <img src={{course.imageUrl}} style="width: 100%;">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary avt-btn" data-toggle="modal" data-target="#changeAvt" style="position: relative; top: -2rem; font-size: 0.75rem">
+                    <i class="far fa-images"></i>
+                </button>
+            </div>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="changeAvt" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Update course image</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/update-course-img" method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <p>Upload an image</p>
+                                <input type="file" accept="image/*" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "image"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}} py-1" name="file" style="border: solid 1px black">
+                            </div>
+                            <input type="hidden" name="courseId" value="{{courseId}}">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-9"> 
+            {{#if msg}}
+                <div class="my-2 alert alert-{{color}} text-center" role="alert">{{msg}}</div>
+            {{/if}}
+            <h2>{{course.courseName}}</h2>
+            <p>{{course.des}}</p>
+            
+            {{#ifEquals course.price "0.00"}}
+                <h5>Type: Free Course</h5>
+            {{else}}
+                <h5>Type: Paid Course</h5>
+                {{#ifEquals course.discount "0"}}
+                <h5>Price: ${{course.price}}</h5>
+                {{else}}
+                <h5>Price: ${{course.price}} <del style="font-size: 0.85rem; color: rgb(151, 151, 151)">${{getSum course.price course.discount}}</del></h5> 
+                {{/ifEquals}}
+            {{/ifEquals}}
+            <h5>Category: {{course.category}}</h5>
+            <br>
+            <div class="lesson">
+                <div class="w-100 d-flex justify-content-between">
+                    {{#if course.lessons}}
+                    <span class="mb-3"><h5>Lessons:</h5></span>
+                    {{else}}
+                    <span class="mb-3">
+                        <h5>No Lessons</h5>
+                    </span>
+                    {{/if}}
+                    
+                    <button type="button" class="btn btn-success {{#if autoshow}}autoshow{{/if}}" data-toggle="modal" data-target="#addLesson" style="height: 2.5rem;">
+                        <i class="fa fa-fw fa-plus-circle"></i> Add New Lesson
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="addLesson" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Add New Lesson</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="/add-lesson" method="post" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <div class="form-group mb-0">
+                                            <label class="title">Title</label>
+                                            <input type="text" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "title"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="title"
+                                                value="{{#if lessontitle}}{{lessontitle}}{{/if}}">
+                                        </div>
+                                        {{#each errorMessage}}
+                                        {{#ifEquals this.param "title"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                                        {{/each}}
+                                        <div class="form-group mb-0">
+                                            <label class="description">Description</label>
+                                            <textarea type="text" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "description"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="description"
+                                                style="height: 6rem">{{#if description}}{{description}}{{/if}}</textarea>
+                                        </div>
+                                        {{#each errorMessage}}
+                                        {{#ifEquals this.param "description"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                                        {{/each}}
+                                        <div class="form-group mb-0">
+                                            <p class="mb-2">Upload a video</p>
+                                            <input type="file" accept="video/*" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "video"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}} py-1" name="file" style="border: solid 1px black">
+                                        </div>
+                                        {{#each errorMessage}}
+                                        {{#ifEquals this.param "video"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                                        {{/each}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="hidden" name="courseId" value="{{courseId}}">
+                                        <button type="button" class="btn btn-secondary cancel-btn" data-dismiss="modal">Cancel</button>
+                                        <button id="addlesson-btn" onclick="changeToLoading()" type="submit" class="btn btn-success" style="min-width: 4rem">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{#each course.lessons}}
+                <a class="btn btn-outline-dark lesson-btn w-100 mb-2" href="/myteaching/lesson/{{this._id}}">
+                    {{this.title}}
+                </a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="my-4 d-flex justify-content-end">
+        <a class="btn btn-outline-secondary mx-2 px-3" href="/edit/{{courseId}}"><i class="far fa-edit"></i> Edit course details</a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteCourse">
+            <i class="fas fa-trash-alt"></i>Delete this course
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="deleteCourse" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Delete Course</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure to delete <strong>{{course.courseName}}</strong> ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <a type="button" class="btn btn-danger" href='/delete-course/{{courseId}}'>Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

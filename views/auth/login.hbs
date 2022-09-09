@@ -1,0 +1,30 @@
+<div class="mx-auto px-0 py-4 mb-5 mt-3">
+    {{#if msg}}
+    <div class="my-2 alert alert-{{color}} text-center" role="alert">{{msg}}</div>
+    {{/if}}
+    <div class="card card-form">
+        <div class="card-header text-center py-auto">
+            <p class="py-3"><b>Sign in to your account</b></p>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/login">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" value="">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" value="">
+                </div>
+                <div class="form-check px-0 my-4 w-50 mx-auto">
+                    <button type="submit" class="btn btn-dark text-center w-100">Sign in</button>
+                </div>
+                
+                <div class="form-group mb-4">
+                    <a href="/reset-password" class="text-decoration-none text-center"><p>Forgot your password?</p></a>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

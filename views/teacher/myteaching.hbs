@@ -1,0 +1,42 @@
+<div class="container-fluid text-white title-learning">
+    <div class="container">
+        <h1>My Teaching</h1>
+    </div>
+</div>
+
+<div class="container pt-4">
+    {{#ifEquals courses.length 0}}
+    <div class="text-center">
+        <h2 class="my-3">THERE ARE NO COURSES AVAILABLE</h2>
+        <h4 class="text-success mt-4">CREATE A NEW COURSE NOW</h4>
+        <button type="button" class="btn btn-success mx-auto mt-2" style="margin-bottom: 14.5rem">
+            <a class="text-white" href="/add-course" style="font-size: 1.1rem"><i class="fa fa-fw fa-plus-circle"></i> Add New
+                Course</a>
+        </button>
+    </div>    
+    {{else}}
+    <button type="button" class="btn btn-success">
+        <a class="text-white" href="/add-course" style="font-size: 1.1rem"><i class="fa fa-fw fa-plus-circle"></i> Add New Course</a>
+    </button>
+    {{#if msg}}
+    <div class="my-2 alert alert-{{color}} text-center" role="alert">{{msg}}</div>
+    {{/if}}
+    <div class="row my-3">
+        {{#each courses}}
+        <div class="card col-3 mb-3 px-0" style="max-width: 16rem; margin-right: 1.75rem;border: solid 1px rgb(149, 149, 150)">
+            <img src={{this.imageUrl}} class="card-img-top img-course">
+            <div class="card-body pb-0">
+                <h5 class="card-title">{{this.courseName}}</h5>
+            </div>
+            <div class="my-3 d-flex justify-content-end" style="margin-right: 0.75rem">
+                <a href="/myteaching/{{this._id}}" class="btn"
+                    style="text-decoration: none; color: #fff; background-color: rgb(64, 86, 248)">Course detail <i class="fas fa-chevron-right"></i></a>
+                {{!-- <div class="btn" style="position: absolute; left: 1rem">
+                    <a class="text-danger" href="/"><i class="fas fa-trash-alt"></i></a>
+                </div> --}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/ifEquals}}
+</div>

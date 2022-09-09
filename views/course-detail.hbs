@@ -1,0 +1,142 @@
+<div class="container-fluid text-white title-courses-details">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>{{course.courseName}}</h1>
+                <h5>{{course.des}}</h5>
+                <p style="margin-bottom: 0.5rem;">
+                    <span class="mr-2">Rating: {{course.rating}}</span>
+                    {{#positiveStar positiveRating 18}}{{/positiveStar}}
+                    {{#negativeStar negativeRating 18}}{{/negativeStar}}
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    Created by {{this.teacher}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <div class="card h-100 card-course-detail" style="width: 21rem;">
+                <img src="{{course.imageUrl}}" class="card-img-top">
+                <div class="card-body">
+                    <h1 class="card-title" style="color: #000 !important;">{{#ifEquals course.price "0.00"}}Free{{else}}${{course.price}}{{/ifEquals}}</h1>
+                    <p class="card-text text-muted">{{this.teacher}}</p>
+                    <p>
+                        <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-vitaly-gorbachev/20/000000/external-student-online-learning-vitaliy-gorbachev-lineal-vitaly-gorbachev.png" class="mr-2 line-card-image"/>
+                        {{course.studentAmount}} {{#ifLessThan course.studentAmount 2}}Student{{else}}Students{{/ifLessThan}}
+                    </p>
+                    {{#if isLoggedIn}}
+                    {{#ifEquals user.permission "Student"}}   
+                    {{#ifEquals course.price "0.00"}}
+                    <form action="/enrollFreeCourse" method="post" >
+                        <input type="hidden" value="{{course._id}}" name="courseId">
+                        <button type="submit" value="{{_id}}" class="btn text-center w-100 button-course-detail">
+                            Enroll
+                        </button>
+                    </form>
+                    {{else}} 
+                    <form action="/cart/add" method="post" >
+                        <input type="hidden" value="{{course._id}}" name="courseId">
+                        <button type="submit" value="{{_id}}" class="btn text-center w-100 button-course-detail">
+                            Add to cart
+                        </button>
+                    </form>
+                    {{/ifEquals}}
+                    {{/ifEquals}}
+                    {{else}}
+                    {{#ifEquals course.price "0.00"}}
+                    <a class="btn text-center w-100 button-course-detail" href="/login">
+                        Enroll Now
+                    </a>
+                    {{else}} 
+                    <a class="btn text-center w-100 button-course-detail" href="/login">
+                        Add to cart
+                    </a>
+                    {{/ifEquals}}
+                    {{/if}}       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mx-md-4 mx-2 my-4">
+    <div class="container">
+        <div class="row justify-content-start my-4 mx-0">
+            <h3>Student feedback</h3>
+        </div>
+        <div class="row my-3 mx-0" style="max-width: 50%; background-color: rgb(248, 249, 251) !important;">
+            <div class="col-md-6 my-auto">
+                <div class="col">
+                    {{#positiveStar 5 24}}{{/positiveStar}}
+                    {{#negativeStar 0 24}}{{/negativeStar}} 
+                    <h4 class="d-inline index-rating">61%</h4>
+                </div>
+                <div class="col">
+                    {{#positiveStar 4 24}}{{/positiveStar}}
+                    {{#negativeStar 1 24}}{{/negativeStar}} 
+                    <h4 class="d-inline index-rating">30%</h4>
+                </div>
+                <div class="col">
+                    {{#positiveStar 3 24}}{{/positiveStar}}
+                    {{#negativeStar 2 24}}{{/negativeStar}}  
+                    <h4 class="d-inline index-rating">7%</h4>
+                </div>
+                <div class="col">
+                    {{#positiveStar 2 24}}{{/positiveStar}}
+                    {{#negativeStar 3 24}}{{/negativeStar}} 
+                    <h4 class="d-inline index-rating">1%</h4>
+                </div>
+                <div class="col">
+                    {{#positiveStar 1 24}}{{/positiveStar}}
+                    {{#negativeStar 4 24}}{{/negativeStar}} 
+                    <h4 class="d-inline index-rating">1%</h4>
+                </div>
+            </div>
+            <div class="col-md-4.5 my-auto">        
+                <div class="col">
+                    <h1 class="text-rating text-center" style="color: rgb(180, 105, 14); font-weight: 600">{{course.rating}}</h1>
+                </div>
+                <div class="col">
+                    {{#positiveStar positiveRating 24}}{{/positiveStar}}
+                    {{#negativeStar negativeRating 24}}{{/negativeStar}}
+                </div>           
+                <div class="col">
+                    <h4 class="text-rating">Course Rating</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mx-md-4 mx-2 my-4">
+    <div class="container">
+        <div class="row justify-content-start my-4 mx-0">
+            <h3>Reviews</h3>
+        </div>
+        {{#each reviews}}
+        <div class="row my-3 mx-0">
+            <div class="card mb-3 border-0" style="max-width: 100%; background-color: rgb(248, 249, 251)">
+                <div class="row g-0 m-2">
+                    <div class="col-md-1 text-center">
+                        <img src="{{this.image}}" class="img-fluid rounded-start review-avatar">
+                    </div>
+                    <div class="col-md-11">
+                        <div class="card-body p-1">
+                            <h4 class="card-title">{{this.name}}</h4>
+                            <p class="card-text">{{this.comment}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container-fluid text-white title-learning">
+    <div class="container">
+        <h1>My Learning</h1>
+    </div>
+</div>
+
+<div class="container pt-4">
+    {{#ifEquals courses.length 0}}
+    <div class="text-center">
+        <h2 class="my-3">THERE ARE NO COURSES AVAILABLE</h2>
+    </div>
+    {{/ifEquals}} 
+    <div class="row">   
+    {{#each courses}}
+    <div class="card col-3 mb-3 px-0 mr-3" style="max-width: 16rem; border: solid 1.5px rgb(212, 203, 252))">
+        <img src={{this.imageUrl}} class="card-img-top">
+        <div class="card-body pb-0">
+            <h5 class="card-title">{{this.courseName}}</h5>
+            <p class="card-title">{{this.des}}</p>
+        </div>
+        <div class="my-3 d-flex justify-content-end" style="margin-right: 0.75rem">
+            <a href="/mylearning/{{this._id}}" class="btn"
+                style="text-decoration: none; color: #fff; background-color: rgb(64, 86, 248)">Go to course <i
+                    class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+    {{/each}}
+    </div>
+</div>

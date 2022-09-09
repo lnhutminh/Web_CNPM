@@ -1,0 +1,55 @@
+<div class="container-fluid mx-md-4 mx-2 my-4">
+    <div class="row justify-content-center mb-4">
+        {{#ifEquals coursesLength 0}}
+        <h2>NO COURSES FOUND FOR "{{keyword}}"</h2>
+        {{else}}
+        <h2>SEARCHING RESULT FOR "{{keyword}}"</h2>
+        {{/ifEquals}}
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 g-3">
+        {{#each courses}}
+        <div class="col col-lg-3 my-2">
+            <div class="card h-100" style="width: 18rem;">
+                <a href="/course-detail/{{this._id}}">
+                    <img src="{{this.imageUrl}}" class="card-img-top img-course">
+                </a> 
+                <div class="card-body">
+                    <a href="/course-detail/{{this.id}}" class="link-text">
+                        <h5 class="card-title" style="color: #000 !important;">{{this.courseName}}</h5>
+                    </a>                      
+                    <p class="card-text text-muted">{{this.teacher}}</p>
+                    <p>
+                        <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-vitaly-gorbachev/20/000000/external-student-online-learning-vitaliy-gorbachev-lineal-vitaly-gorbachev.png" class="mr-2 line-card-image"/>
+                        {{this.studentAmount}} {{#ifLessThan this.studentAmount 2}}Student{{else}}Students{{/ifLessThan}}
+                    </p>
+                    <p>
+                        <img src="https://img.icons8.com/fluency/20/000000/star.png" class="mr-2 line-card-image"/>
+                        {{this.rating}}
+                    </p>   
+                    <p>
+                        {{#ifEquals this.price "0.00"}}
+                        <h6>Free</h6>
+                        {{else}}
+                        <h6>$ {{this.price}}</h6>
+                        {{/ifEquals}}
+                    </p> 
+                    {{#ifEquals this.price "0.00"}}
+                    <div class="d-flex justify-content-end">
+                        <a href="/" class="btn btn-success" style="text-decoration: none;">Enroll</a>
+                    </div>
+                    {{else}}
+                    <div class="d-flex justify-content-end">
+                        <form action="/cart/add" method="post" >
+                            <input type="hidden" value="{{this._id}}" name="courseId">
+                            <button type="submit" class="btn" style="text-decoration: none; color: #fff; background-color: rgb(64, 86, 248)">
+                                Add to cart
+                            </button>
+                    </form>
+                    </div>
+                    {{/ifEquals}}       
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

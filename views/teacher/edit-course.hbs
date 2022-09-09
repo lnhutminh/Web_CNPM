@@ -1,0 +1,99 @@
+<div class="container-fluid w-75 my-4">
+    <div class="card" style="border:solid 0.1rem rgb(49, 157, 142)">
+        <div class="card-body">
+            <h3 class='text-center my-3'>UPDATE COURSE INFORMATION</h3>
+            <div class="container-fluid w-75">
+                <form role="form" method="post" action="/edit" enctype="multipart/form-data">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-group mb-0">
+                                <label class="course_name">Course Name</label>
+                                <input type="text" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "course_name"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="course_name" value="{{course.courseName}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "course_name"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div class="form-group mb-0">
+                                <label class="description">Description</label>
+                                <textarea type="text" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "description"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="description" style="height: 6rem">{{course.des}}</textarea>
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "description"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div class="form-group mt-3">
+                                <select class="form-control form-input" name="type" onchange="showPrice(event)">
+                                    <option value="free" {{#ifEquals course.price "0.00"}}selected{{/ifEquals}}>Free</option>
+                                    <option value="paid" {{#ifNotEquals course.price "0.00"}}selected{{/ifNotEquals}}>Paid</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3 price-block" style="display: {{#ifNotEquals course.price "0.00"}}block{{else}}none{{/ifNotEquals}};">
+                            <div class="form-group mt-3 mb-0">
+                                <select class="{{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "discount"}}error{{/ifEquals}}{{/each}}{{/if}} form-control py-1" name="price">
+                                    <option disabled selected>Price</option>
+                                    <option value="9.99" {{#ifEquals (getSum course.price course.discount) "9.99" }}selected{{/ifEquals}}>$9.99</option>
+                                    <option value="19.99" {{#ifEquals (getSum course.price course.discount) "19.99" }}selected{{/ifEquals}}>$19.99</option>
+                                    <option value="29.99" {{#ifEquals (getSum course.price course.discount) "29.99" }}selected{{/ifEquals}}>$29.99</option>
+                                    <option value="39.99" {{#ifEquals (getSum course.price course.discount) "39.99" }}selected{{/ifEquals}}>$39.99</option>
+                                    <option value="49.99" {{#ifEquals (getSum course.price course.discount) "49.99" }}selected{{/ifEquals}}>$49.99</option>
+                                    <option value="59.99" {{#ifEquals (getSum course.price course.discount) "59.99" }}selected{{/ifEquals}}>$59.99</option>
+                                    <option value="69.99" {{#ifEquals (getSum course.price course.discount) "69.99" }}selected{{/ifEquals}}>$69.99</option>
+                                    <option value="79.99" {{#ifEquals (getSum course.price course.discount) "79.99" }}selected{{/ifEquals}}>$79.99</option>
+                                    <option value="89.99" {{#ifEquals (getSum course.price course.discount) "89.99" }}selected{{/ifEquals}}>$89.99</option>
+                                    <option value="99.99" {{#ifEquals (getSum course.price course.discount) "99.99" }}selected{{/ifEquals}}>$99.99</option>
+                                </select>
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "price"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                        <div class="col-3 discount-block" style="display: {{#ifNotEquals course.price "0.00"}}block{{else}}none{{/ifNotEquals}};">
+                            <div class="form-group mt-3 mb-0">
+                                <select class="{{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "discount"}}error{{/ifEquals}}{{/each}}{{/if}} form-control py-1" name="discount">
+                                    <option disabled selected>Discount</option>
+                                    <option value="0" {{#ifEquals course.discount "0" }}selected{{/ifEquals}}>- $0.00</option>
+                                    <option value="5" {{#ifEquals course.discount "5" }}selected{{/ifEquals}}>- $5.00</option>
+                                    <option value="10" {{#ifEquals course.discount "10" }}selected{{/ifEquals}}>- $10.00</option>
+                                    <option value="15" {{#ifEquals course.discount "15" }}selected{{/ifEquals}}>- $15.00</option>
+                                    <option value="20" {{#ifEquals course.discount "20" }}selected{{/ifEquals}}>- $20.00</option>
+                                    <option value="25" {{#ifEquals course.discount "25" }}selected{{/ifEquals}}>- $25.00</option>
+                                    <option value="30" {{#ifEquals course.discount "30" }}selected{{/ifEquals}}>- $30.00</option>
+                                    <option value="35" {{#ifEquals course.discount "35" }}selected{{/ifEquals}}>- $35.00</option>
+                                    <option value="40" {{#ifEquals course.discount "40" }}selected{{/ifEquals}}>- $40.00</option>
+                                    <option value="45" {{#ifEquals course.discount "45" }}selected{{/ifEquals}}>- $45.00</option>
+                                    <option value="50" {{#ifEquals course.discount "50" }}selected{{/ifEquals}}>- $50.00</option>
+                                </select>
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "discount"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-0">
+                                <label class="category">Category</label>
+                                <input type="text" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "category"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="category" value="{{course.category}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "category"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    <input type="hidden" name="courseId" value="{{courseId}}">
+                    <div class="text-center mb-3 mt-4">
+                        <button type="submit" class="btn text-center w-50 mx-auto btn-submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

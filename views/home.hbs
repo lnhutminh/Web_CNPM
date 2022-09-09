@@ -1,0 +1,130 @@
+<div class="container-fluid pt-1">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-3 border-0" style="max-width: 100%; background-color: rgb(248, 249, 251)">
+                <div class="w-100 row g-0 m-2">       
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h1 class="card-title">Welcome to online E-Learning</h1>
+                            <h5 class="card-text">E-Learning is an online learning platform that offers anyone, anywhere access to online courses from highly qualified instructors.</h6>
+                            <ul class="list-unstyled">
+                                <li class="">
+                                    <img src="https://img.icons8.com/fluency/24/000000/ok.png"/ class="mr-3">
+                                    More 10K students are building new skills.
+                                </li>
+                                <li class="">
+                                    <img src="https://img.icons8.com/fluency/24/000000/ok.png"/ class="mr-3">
+                                    Highly qualified instructors from leading universities in the country.
+                                </li>
+                            </ul>
+                            {{#if isLoggedIn}}
+                            {{#ifEquals user.permission "Teacher"}}
+                            <a class="btn text-center" href="/myteaching" style="background-color: rgb(254, 117, 88); color: #fff;">
+                                Go to my teaching
+                            </a>
+                            {{/ifEquals}}
+                            {{#ifEquals user.permission "Student"}}
+                            <a class="btn text-center" href="/mylearning" style="background-color: rgb(254, 117, 88); color: #fff;">
+                                Go to my learning
+                            </a>
+                            {{/ifEquals}}
+                            {{else}}
+                            <a class="btn text-center" href="/login" style="background-color: rgb(254, 117, 88); color: #fff;">
+                                Get Started
+                            </a>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img src="https://amber.edu.vn/wp-content/uploads/2020/01/57.jpg" class="img-fluid rounded-start">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mx-md-4 mx-2 my-4">
+    <div class="row justify-content-center my-4">
+        <h1>Latest Courses</h1>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 g-3">
+        {{#each courses}}
+        <div class="col col-lg-3 my-2">
+            <div class="card h-100" style="width: 18rem;">
+                <a href="/course-detail/{{this._id}}">
+                    <img src="{{this.imageUrl}}" class="card-img-top img-course">
+                </a> 
+                <div class="card-body">
+                    <a href="/course-detail/{{this.id}}" class="link-text">
+                        <h5 class="card-title" style="color: #000 !important;">{{this.courseName}}</h5>
+                    </a>                      
+                    <p class="card-text text-muted">{{this.teacher}}</p>
+                    <p>
+                        <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-vitaly-gorbachev/20/000000/external-student-online-learning-vitaliy-gorbachev-lineal-vitaly-gorbachev.png" class="mr-2 line-card-image"/>
+                        {{this.studentAmount}} {{#ifLessThan this.studentAmount 2}}Student{{else}}Students{{/ifLessThan}}
+                    </p>
+                    <p>
+                        <img src="https://img.icons8.com/fluency/20/000000/star.png" class="mr-2 line-card-image"/>
+                        {{this.rating}}
+                    </p>   
+                    <p>
+                        {{#ifEquals this.price "0.00"}}
+                        <h6>Free</h6>
+                        {{else}}
+                        {{#ifEquals this.discount "0"}}
+                        <h6>$ {{this.price}}</h6>
+                        {{else}}
+                        <h6>$ {{this.price}} <del style="font-size: 0.85rem; color: rgb(151, 151, 151)">${{getSum this.price this.discount}}</del></h6>
+                        {{/ifEquals}}
+                        {{/ifEquals}}
+                    </p>
+                    {{#ifEquals this.price "0.00"}}
+                    <div class="d-flex justify-content-end">
+                        <form action="/enrollFreeCourse" method="post">
+                            <input type="hidden" value="{{this._id}}" name="courseId">
+                            <button type="submit" class="btn btn-success" style="text-decoration: none; color: #fff;">
+                                Enroll
+                            </button>
+                        </form>
+                    </div>
+                    {{else}}
+                    <div class="d-flex justify-content-end">
+                        <form action="/cart/add" method="post" >
+                            <input type="hidden" value="{{this._id}}" name="courseId">
+                            <button type="submit" class="btn" style="text-decoration: none; color: #fff; background-color: rgb(64, 86, 248)">
+                                Add to cart
+                            </button>
+                    </form>
+                    </div>
+                    {{/ifEquals}}       
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+
+<div class="container-fluid mx-md-4 mx-2 mb-4">
+    <div class="row mx-0 my-2">
+        <h1>New Teachers</h1>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 g-3">
+        {{#each instructors}}
+        <div class="col col-lg-3 my-2">
+            <div class="card h-100" style="width: 18rem;">
+                <img src="{{this.avatar}}" class="card-img-top img-instructor">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text text-muted">{{this.category}}</p>
+                    <p>
+                        <img src="https://img.icons8.com/ios-filled/20/000000/education.png" class="mr-2 line-card-image"/>
+                        {{this.courseAmount}} {{#ifLessThan this.courseAmount 2}}Course{{else}}Courses{{/ifLessThan}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

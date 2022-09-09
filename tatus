@@ -1,0 +1,240 @@
+[33mcommit 19babb287cd2e17287aefcbb3e2950f7bf7972bb[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Long Huynh <longhuynhpyn01@gmail.com>
+Date:   Mon Dec 20 16:30:07 2021 +0700
+
+    Update UI/UX
+
+[33mcommit 94368d3f0848064ac2d4ce3380545b37c40b056e[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sun Dec 19 00:00:27 2021 +0700
+
+    move rate course
+
+[33mcommit 44beaae8bbfcc1ec065b9db394b31e0c74a03413[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 23:18:41 2021 +0700
+
+    get Single Lesson by courseid and lessonid
+
+[33mcommit 0cd12436120e4d717bfdde39a19f0cf155689584[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 23:02:08 2021 +0700
+
+    get all Lessons from Course
+
+[33mcommit 2a7794e34f5a9f27627351fcc2d7164a114b1a78[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 22:54:52 2021 +0700
+
+    Delete course
+
+[33mcommit e61b32cfe6abc9fce6cc5902d6f88bc72b7ed248[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 20:24:07 2021 +0700
+
+    fix user model
+
+[33mcommit 7428753669235e32ea3e79de09a8dffaba6a9438[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 20:09:51 2021 +0700
+
+    add course
+
+[33mcommit a6b9c9594fe5b18892b001d7de2ec15fcf7a3a3f[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 19:06:06 2021 +0700
+
+    add userController
+
+[33mcommit 4033d5a9326ac92eec5dc8e32bbeff42e0fd8b52[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 15:28:00 2021 +0700
+
+    get all course by category name
+
+[33mcommit 7a3ef2832807f0b458cea4d0cd39e58a0f8c101d[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 15:19:19 2021 +0700
+
+    get All categories
+
+[33mcommit 017ff3f8514b6481d78753643a401f4ece0c1523[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 04:08:19 2021 +0700
+
+    get all course by teacher id
+
+[33mcommit 381677afec35364cdab04213330178fc2bde51e1[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 03:56:44 2021 +0700
+
+    get 1 course by Id
+
+[33mcommit e408c18e54d07b3c555b3d5ad22e08f8d636e29a[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 03:38:44 2021 +0700
+
+    full text search
+
+[33mcommit 739dd9faa1630bb05f72f6c4f19d610314caa967[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sat Dec 18 00:55:49 2021 +0700
+
+    add getAllCourse
+
+[33mcommit 973b6a62731f877ea6c200cabbf885c9824a0852[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Fri Dec 17 02:06:36 2021 +0700
+
+    add function courseController
+
+[33mcommit d065c5c32dfd5d211a5f4a2a661309fa48d435cd[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Fri Dec 17 02:04:27 2021 +0700
+
+    add lesson id
+
+[33mcommit 531ef504605ee602dbb8748ecdcf0e0ee2aeccfe[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Thu Dec 16 19:33:41 2021 +0700
+
+    update name
+
+[33mcommit d277d59b3c32fb551c48b44e6757e5e14fb0b099[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Thu Dec 16 19:32:32 2021 +0700
+
+    change file name
+
+[33mcommit 28bd17c55d1b202b5d2e01022a0ea9f144bdf8df[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Thu Dec 16 19:03:22 2021 +0700
+
+    course router
+
+[33mcommit 6be232fa3f15c4caff9055ef97cbf2606abc911f[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Wed Dec 15 22:17:20 2021 +0700
+
+    add mongodb link
+
+[33mcommit 4b4c8d4b94c0d49190c3b29612f4c902c80f8283[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Wed Dec 15 19:29:23 2021 +0700
+
+    Add mongodb connection
+
+[33mcommit 6a9451ae07efcfecf6f0c7c0e29e5b97d405c93d[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Mon Dec 13 21:17:24 2021 +0700
+
+    checkout page
+
+[33mcommit 6df1e4ed08d167c7f63976d6176f0341d995d3bf[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Mon Dec 13 16:03:31 2021 +0700
+
+    update total price in cart page
+
+[33mcommit e1224132bbbd460e52c77c1275bb7fd391bc58b5[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Mon Dec 13 15:58:32 2021 +0700
+
+    cart page
+
+[33mcommit 51f727a4be5641142fda35c345b6992e2304afd2[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Mon Dec 13 10:15:53 2021 +0700
+
+    update info page
+
+[33mcommit 5261bb16849ff1cb73597c6ce8528f56e69dbb56[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Mon Dec 13 09:12:14 2021 +0700
+
+    reset password page
+
+[33mcommit 5c2cc04ea094ed7804261513a79c5c667540af57[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Mon Dec 13 08:51:37 2021 +0700
+
+    adding some fields in models
+
+[33mcommit 89d53cba112908041d05d52eca405311475ad19d[m
+Merge: 85d9778 0d8d551
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Mon Dec 13 07:58:20 2021 +0700
+
+    Merge branch 'main' of https://github.com/bachtangthang/web-app-nmcnpm
+
+[33mcommit 85d9778c86b8f8a00b51c6e3ce9341f3a6fbdfbf[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Mon Dec 13 00:26:55 2021 +0700
+
+    responsive search bar
+
+[33mcommit 0d8d55129e7d4e13370658cefee955d7a912dffe[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sun Dec 12 23:51:05 2021 +0700
+
+    fix typo
+
+[33mcommit 937fd22b7735c427d43f094048fb7dc28dbb190e[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Sun Dec 12 23:30:51 2021 +0700
+
+    reconfiguring controller method and route
+
+[33mcommit 6421971c6be347de6995a410997a7a8c5d72d30b[m
+Author: Long Huynh <longhuynhpyn01@gmail.com>
+Date:   Sun Dec 12 22:56:01 2021 +0700
+
+    Add some UI
+
+[33mcommit bd43f1e34943d87d062dbf08ba7e7cd07f161191[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sun Dec 12 15:35:40 2021 +0700
+
+    fix typo
+
+[33mcommit a8137bf983588a6522ced7313fd67a62286cb9dd[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sun Dec 12 15:13:31 2021 +0700
+
+    add course.model.js
+
+[33mcommit c704d8a934dbbbf0475d2c91226e610cf9d99d28[m
+Author: bachtangthang <thang5217113@gmail.com>
+Date:   Sun Dec 12 14:53:59 2021 +0700
+
+    add user.model.js
+
+[33mcommit 3258c4cd8076ae22aef104909222622988f595b6[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Sun Dec 12 08:21:59 2021 +0700
+
+    adding some controller files and update readme
+
+[33mcommit fe7c411a2b88b4eca704ae05423844945fd0c44e[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Sun Dec 12 08:15:41 2021 +0700
+
+    update setup file and folder
+
+[33mcommit d0e0888d60905f32b1357e508468727bf9d19d8e[m
+Author: Minh Le <lenhatminh11a1@gmail.com>
+Date:   Sun Dec 12 01:15:05 2021 +0700
+
+    setup file and folder
+
+[33mcommit a0fbf2b7e38473780e438d7020a18741d6bf2cbd[m
+Author: bachtangthang <51031544+bachtangthang@users.noreply.github.com>
+Date:   Sat Dec 11 23:32:58 2021 +0700
+
+    Update README.md
+
+[33mcommit b060ce752eb1b7379c200c2d11e01a11a8413f1f[m
+Author: bachtangthang <51031544+bachtangthang@users.noreply.github.com>
+Date:   Sat Dec 11 23:32:11 2021 +0700
+
+    Initial commit

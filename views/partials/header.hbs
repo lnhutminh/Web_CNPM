@@ -1,0 +1,107 @@
+<nav class="navbar navbar-expand-lg pb-0">
+    <div class="container-fluid">
+        <a class="navbar-brand title-page text-center mx-6" href="/">E-Learning</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="d-flex search-form col" id="search-form" method="get" action="/search">
+            <input class="form-control me-2 search-bar" style="flex:1" id="searchText" type="search" placeholder="Search for anything" aria-label="Search" value="{{keyword}}" name="keyword">
+            <button type="submit" class="btn nav-link text-center">Search</button>
+        </form>
+        <ul class="navbar-nav d-flex justify-content-end mr-0" >
+            {{!-- <li class="nav-item mx-2">
+                <a class="nav-link" href="/coursesDetail">Courses</a>
+            </li> --}} 
+            {{#ifEquals user.permission "Student"}}
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/mylearning">My Learning</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                        Cart
+                    </a>
+                </li>
+            {{/ifEquals}}
+            {{#ifEquals user.permission "Teacher"}}
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/myteaching">My Teaching</a>
+                </li>
+            {{/ifEquals}}
+            {{#ifEquals user.permission "Admin"}}
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/management">Management</a>
+                </li>
+            {{/ifEquals}}
+            
+            {{#if isLoggedIn}}
+            <li class="nav-item ml-2 mr-4">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{user.avatar}}" class="user-avatar"></img></a>
+                            <div class="dropdown-menu user-item" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-item">
+                                    <p class="mb-0" style="font-weight: bold;">{{user.first_name}} {{user.last_name}}</p>
+                                    <p class="mb-0">{{user.email}}</p>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <button type="button" class="dropdown-item {{#if isShow}}autoshow{{/if}}" data-toggle="modal" data-target="#changeAvatar" style="cursor: pointer">Đổi ảnh đại diện</button>
+                                <a class="dropdown-item" href="/update-info">Cập nhật thông tin</a>
+                                <a class="dropdown-item" href="/change-password">Đổi mật khẩu</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">
+                                    <img class="logout-icon" src="https://img.icons8.com/metro/26/000000/exit.png" />
+                                    Đăng xuất
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>    
+            </li>
+            {{else}}
+            <li class="nav-item mx-2 sign-item">
+                <a class="nav-link text-center" href="/login">
+                    <span class="text-white">Sign In</span>
+                </a>
+            </li>
+            <li class="nav-item mx-2 sign-item">
+                <a class="nav-link text-center" href="/signup">
+                    <span class="text-white">Sign Up</span>
+                </a>
+            </li>
+            {{/if}}
+        </ul>
+  </div>
+</nav>
+
+<div class="modal fade" id="changeAvatar" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Change avatar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/change-avatar" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <p>Upload new avatar</p>
+                    <input type="file" accept="image/*" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "image"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}} py-1" name="file" style="border: solid 1px black">
+                {{#each errorMessage}}
+                {{#ifEquals this.param "image"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                {{/each}}
+                </div>
+                
+                <input type="hidden" value="{{user._id}}" name="userId">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Change</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

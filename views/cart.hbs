@@ -1,0 +1,43 @@
+<div class="container pt-1 mt-3">
+    <h1 class="text-primary">Shopping Cart</h1>
+    <hr style="border-color: rgb(150, 150, 150)"></hr>
+    <h5>{{numCourses}} {{#ifLessThan numCourses 2}}Course{{else}}Courses{{/ifLessThan}} in Cart</h5>
+    <div class="row">
+        <div class="col-9 px-0">
+            {{#each courses}}
+            <div class="card mb-3" style="border-color:rgb(192, 192, 192);">
+                <div class="row g-0">
+                    <div class="col-md-3">
+                        <img src={{this.imageUrl}} class="img-fluid rounded-start">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.title}}</h5>
+                            <p class="card-text">{{this.description}}</p>
+                            <p class="card-text mr-2 d-inline-block">Rating: {{this.rating}}</p>
+                            {{#positiveStar 1 18}}{{/positiveStar}}
+                        </div>
+                    </div>
+                    <div class="col-md-2 my-auto">
+                        <h5 class="pb-2">${{this.price}}</h5>
+                            <form action="/cart/del" method="post" >
+                            <input type="hidden" value="{{this._id}}" name="courseId">
+                            <button type="submit" value="{{this._id}}" class="btn btn-danger">
+                                <i class="fas fa-minus-circle"></i> Remove 
+                            </button>                 
+                        </form>
+                    </div>       
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{#ifEquals numCourses 0}}
+        {{else}}
+        <div class="col-3 pl-4">
+            <h5>Total</h5>
+            <h1>${{totalPrice}}</h1>
+            <a href="/checkout" class="btn btn-dark text-center w-100" style="color: #fff; text-decoration: none;" >Go to Checkout</a>
+        </div>
+        {{/ifEquals}}
+    </div>
+</div>

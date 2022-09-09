@@ -1,0 +1,116 @@
+<div class="container-fluid text-white title-courses-details">
+    <div class="container-fluid py-4">
+        <div class="row mx-3">
+            <div class="col-md-9">
+                <h1>{{course.courseName}}</h1>
+                <h5>{{course.des}}</h5>
+                <p style="margin-bottom: 0.5rem;">
+                    <span class="mr-2">Rating: {{course.rating}} <i class="fas fa-star text-warning"></i></span>
+                </p>
+                <p style="margin-bottom: 0.5rem;">
+                    Created by: {{teacher}}
+                </p>
+            </div>
+            <div class="col-md-3 p-0">
+                <img class="" style="max-height: 13rem" src="{{course.imageUrl}}">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+
+<div class="container-fluid mx-md-4 mx-2 my-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-6"><h3>Lessons</h3>
+                {{#each course.lessons}}
+                <a class="btn btn-outline-dark lesson-btn w-100 mb-2" href="/mylearning/lesson/{{this._id}}">
+                    {{this.title}}
+                </a>
+                {{/each}}
+            </div>
+            <div class="col-6">
+                <div class="row justify-content-start mx-0">
+            <h3>Student feedback</h3>
+            </div>
+            <div class="row my-3 mx-0" style="background-color: rgb(248, 249, 251) !important;">
+            <div class="my-auto">
+                <div class="col">
+                    {{#positiveStar 5 24}}{{/positiveStar}}
+                    {{#negativeStar 0 24}}{{/negativeStar}} 
+                    <h4 class="d-inline index-rating">61%</h4>
+                </div>
+                <div class="col">
+                    {{#positiveStar 4 24}}{{/positiveStar}}
+                    {{#negativeStar 1 24}}{{/negativeStar}} 
+                    <h4 class="d-inline index-rating">30%</h4>
+                </div>
+                <div class="col">
+                    {{#positiveStar 3 24}}{{/positiveStar}}
+                    {{#negativeStar 2 24}}{{/negativeStar}}  
+                    <h4 class="d-inline index-rating">7%</h4>
+                </div>
+                <div class="col">
+                    {{#positiveStar 2 24}}{{/positiveStar}}
+                    {{#negativeStar 3 24}}{{/negativeStar}} 
+                    <h4 class="d-inline index-rating">1%</h4>
+                </div>
+                <div class="col">
+                    {{#positiveStar 1 24}}{{/positiveStar}}
+                    {{#negativeStar 4 24}}{{/negativeStar}} 
+                    <h4 class="d-inline index-rating">1%</h4>
+                </div>
+            </div>
+            <div class="my-auto">        
+                <div class="col">
+                    <h1 class="text-rating text-center" style="color: rgb(180, 105, 14); font-weight: 600">{{course.rating}}</h1>
+                </div>
+                <div class="col">
+                    {{#positiveStar positiveRating 24}}{{/positiveStar}}
+                    {{#negativeStar negativeRating 24}}{{/negativeStar}}
+                </div>           
+                <div class="col">
+                    <h4 class="text-rating">Course Rating</h4>
+                </div>
+            </div>
+            </div>
+            <div>
+                <h3>Reviews</h3>
+                </div>
+                <div class="row justify-content-center mt-4 mx-0" style="max-width: 60%; margin-bottom: 3rem !important;">
+                    <img src="https://avatar-redirect.appspot.com/google/101418215578229362988?size=400" class="img-fluid rounded-start my-avatar">
+                    <div class="card-body p-1">
+                        <form class="d-flex col" method="post" action="/mylearning/{{course.id}}">
+                            <input class="form-control me-2 review-bar" style="flex:1" placeholder="Enter your comment" name="comment" type="search" aria-label="Search">
+                        </form>
+                    </div>
+                </div>
+                {{#each reviews}}
+                <div class="row my-3 mx-0">
+                    <div class="card mb-3 border-0" style="max-width: 100%; background-color: rgb(248, 249, 251)">
+                        <div class="row g-0 m-2">
+                            <div class="col-md-1 text-center">
+                                <img src="{{this.image}}" class="img-fluid rounded-start review-avatar">
+                            </div>
+                            <div class="col-md-11">
+                                <div class="card-body p-1">
+                                    <h4 class="card-title">{{this.name}}</h4>
+                                    <p class="card-text">{{this.comment}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                </div>
+            </div>    
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="container-fluid w-75 my-4">
+    <div class="card" style="border:solid 0.1rem rgb(49, 157, 142)">
+        <div class="card-body">
+            <h3 class='text-center my-3'>CHECKOUT</h3>
+            <div class="container-fluid w-75">
+                <form role="form" method="post" action="/checkout">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="form-group mb-0">
+                                <label class="fullname">Full Name</label>
+                                <input type="text" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "fullname"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="fullname" value="{{#if fullname}}{{fullname}}{{/if}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "fullname"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group mb-0">
+                                <label class="email">Email</label>
+                                <input type="email" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "email"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="email" value="{{#if email}}{{email}}{{/if}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <div class="form-group mb-0">
+                                <label class="card_number">Card Number</label>
+                                <input type="number" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "card_number"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="card_number" value="{{#if card_number}}{{card_number}}{{/if}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "card_number"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group mb-0">
+                                <label class="card_name">Name on Card</label>
+                                <input type="text" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "card_name"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="card_name" value="{{#if card_name}}{{card_name}}{{/if}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "card_name"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group mb-0">
+                                <label class="security">Security Code</label>
+                                <input type="number" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "security"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="security" value="{{#if security}}{{security}}{{/if}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "security"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <div class="form-group mb-0">
+                                <label class="start_month">Start Month</label>
+                                <input type="number" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "start_month"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="start_month" value="{{#if start_month}}{{start_month}}{{/if}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "start_month"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group mb-0">
+                                <label class="start_year">Start Year</label>
+                                <input type="number" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "start_year"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="start_year" value="{{#if start_year}}{{start_year}}{{/if}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "start_year"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group mb-0">
+                                <label class="exp_month">Expiry Month</label>
+                                <input type="number" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "exp_month"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="exp_month" value="{{#if exp_month}}{{exp_month}}{{/if}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "exp_month"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group mb-0">
+                                <label class="exp_year">Expiry Year</label>
+                                <input type="number" class="form-control {{#if errorMessage}}{{#each errorMessage}}{{#ifEquals this.param "exp_year"}}error{{/ifEquals}}{{/each}}{{else}}form-input{{/if}}" name="exp_year" value="{{#if exp_year}}{{exp_year}}{{/if}}">
+                            </div>
+                            {{#each errorMessage}}
+                            {{#ifEquals this.param "exp_year"}}<div class="error-msg mb-3">{{this.msg}}</div>{{/ifEquals}}
+                            {{/each}}
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="text-center mb-3 mt-4">
+                        <button type="submit" class="btn text-center w-50 mx-auto btn-submit">Confirm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
